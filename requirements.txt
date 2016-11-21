@@ -3,4 +3,3 @@ nose
 honcho
 coveralls
 flask-script
-gevent
