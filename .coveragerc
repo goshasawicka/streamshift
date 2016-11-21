@@ -1,0 +1,7 @@
+[run]
+source = radiobuff
+
+[report]
+omit =
+    */python?.?/*
+    */site-packages/nose/*
