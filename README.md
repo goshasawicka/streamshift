@@ -21,12 +21,3 @@ Serving stream
 . ./bin/activate
 ./main.py
 ```
-
-## g tests
-
-```
-nosetests --exe
-```
-
-## config.cfg
-...
