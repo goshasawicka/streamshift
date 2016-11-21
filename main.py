@@ -4,9 +4,7 @@
 
 from flask import Flask
 from flask import Response
-from stream import Stream
-from stream import ChunkManager
-# from gevent.pywsgi import WSGIServer
+from streamshift.stream import Stream, ChunkManager
 
 import ConfigParser
 
@@ -44,6 +42,4 @@ if __name__ == "__main__":
         urls[station] = config.get(station, 'url')
 
     app.config['URLS'] = urls
-    # http_server = WSGIServer(('0.0.0.0', 5000), app)
-    # http_server.serve_forever()
     app.run(host="0.0.0.0", threaded = True)
