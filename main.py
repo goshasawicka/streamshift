@@ -20,12 +20,12 @@ def index():
     # station index
     return ''
 
-@app.route('/station/<string:name>/<int:shift>')
-def station(name, shift):
+@app.route('/station/<string:name>/<int:shift_offset>')
+def station(name, shift_offset):
     url = app.config["URLS"][name]
     stream = Stream(# TODO
         url=url,
-        cm=ChunkManager('./data/', url, buffer, shift)
+        cm=ChunkManager('./data/', url, shift_offset)
     ).listen()
 
     return Response(stream, mimetype='audio/mpeg')

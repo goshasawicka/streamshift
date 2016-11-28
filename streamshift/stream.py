@@ -5,7 +5,6 @@ import time
 import logging
 from util import GenericObject
 
-BUFFER_SIZE = 1024 * 50
 
 
 class Chunk(GenericObject):
@@ -42,8 +41,9 @@ class Chunk(GenericObject):
 
 
 class ChunkManager(GenericObject):
-    def __init__(self, path, url, buffer, shift):
-        self.buffer = buffer
+
+    def __init__(self, path, url, shift):
+        # self.buffer = buffer
         self.shift = shift
 
         # TODO: validation buffer > shift
@@ -88,11 +88,12 @@ class Stream(GenericObject):
         self.url = url
         self.cm = cm
 
+
     def listen(self):
         # print ("### stream.py, Stream listen")
         chunk = self.cm.find()
         while chunk:
-            self.logger.info("Listening to chunk %d" % chunk.timestamp)
+            self.logger.info("Listening to chunk %d" % float(chunk.timestamp))
             yield chunk.read()
             self.logger.info("Waiting %d" % chunk.seconds)
             time.sleep(chunk.seconds)
@@ -100,18 +101,18 @@ class Stream(GenericObject):
 
         self.logger.error("Run out of chunks")
 
-    def purge(self):
+    # def purge(self):
         # print ("### stream.py, Stream purge")
-        for chunk in self.cm.list():
-            if (time.time() - float(os.path.basename(chunk.timestamp))) > chunk.cm.buffer:
-                self.logger.debug("Purge chunk %s" % os.path.basename(chunk.timestamp))
-                chunk.delete()
+        # for chunk in self.cm.list():
+        #     if (time.time() - float(os.path.basename(chunk.timestamp))) > chunk.cm.buffer:
+        #         self.logger.debug("Purge chunk %s" % os.path.basename(chunk.timestamp))
+        #         chunk.delete()
 
-    def buffer(self):
+    # def buffer(self):
         # print ("### stream.py, Stream buffer")
-        conn = urllib2.urlopen(self.url)
-        while True:
-            chunk = conn.read(BUFFER_SIZE)
-            if not chunk:
-                break
-            self.cm.write(time.time(), chunk)
+        # conn = urllib2.urlopen(self.url)
+        # while True:
+        #     chunk = conn.read(BUFFER_SIZE)
+        #     if not chunk:
+        #         break
+        #     self.cm.write(time.time(), chunk)

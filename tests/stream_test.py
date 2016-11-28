@@ -11,7 +11,8 @@ class StreamTest(unittest.TestCase):
             "http://stream3.polskieradio.pl:8904/",
             ChunkManager(
                 "./data/",
-                "http://stream3.polskieradio.pl:8904/"
+                "http://stream3.polskieradio.pl:8904/",
+                60
             )
         )
 #        stream.buffer()

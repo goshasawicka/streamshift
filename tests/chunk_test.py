@@ -7,7 +7,8 @@ class ChunkTest(unittest.TestCase):
     def setUp(self):
         self.cm = ChunkManager(
             "/tmp/",
-            "http://stream3.polskieradio.pl:8904/"
+            "http://stream3.polskieradio.pl:8904/",
+            60
         )
         self.chunk = Chunk(time.time(), self.cm.path, self.cm)
 
