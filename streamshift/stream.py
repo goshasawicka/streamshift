@@ -11,6 +11,7 @@ BUFFER_SIZE = 1024 * 50
 class Chunk(GenericObject):
     filepath = ""
     timestamp = ""
+    buffer = ""
 
     def __init__(self, timestamp, path, cm):
         self.timestamp = timestamp
@@ -41,14 +42,19 @@ class Chunk(GenericObject):
 
 
 class ChunkManager(GenericObject):
-    def __init__(self, path, url):
+    def __init__(self, path, url, buffer, shift):
+        self.buffer = buffer
+        self.shift = shift
+
+        # TODO: validation buffer > shift
+
         self.path = path + hashlib.md5(url).hexdigest() + "/"
         if not os.path.exists(self.path):
             os.mkdir(self.path)
 
-    def find(self, offset):
-        self.logger.debug("Find chunk with offset %s" % str(offset))
-        t = time.time() - offset
+    def find(self):
+        self.logger.debug("Find chunk with offset %s" % str(self.shift))
+        t = time.time() - self.shift
         files = sorted(os.listdir(self.path))
 
         for file in files:
@@ -78,11 +84,13 @@ class ChunkManager(GenericObject):
 class Stream(GenericObject):
 
     def __init__(self, url, cm):
+        # print ("### stream.py, Stream init")
         self.url = url
         self.cm = cm
 
-    def listen(self, offset):
-        chunk = self.cm.find(offset)
+    def listen(self):
+        # print ("### stream.py, Stream listen")
+        chunk = self.cm.find()
         while chunk:
             self.logger.info("Listening to chunk %d" % chunk.timestamp)
             yield chunk.read()
@@ -93,12 +101,14 @@ class Stream(GenericObject):
         self.logger.error("Run out of chunks")
 
     def purge(self):
+        # print ("### stream.py, Stream purge")
         for chunk in self.cm.list():
-            if (time.time() - float(os.path.basename(chunk.timestamp))) > 180:
+            if (time.time() - float(os.path.basename(chunk.timestamp))) > chunk.cm.buffer:
                 self.logger.debug("Purge chunk %s" % os.path.basename(chunk.timestamp))
                 chunk.delete()
 
     def buffer(self):
+        # print ("### stream.py, Stream buffer")
         conn = urllib2.urlopen(self.url)
         while True:
             chunk = conn.read(BUFFER_SIZE)
