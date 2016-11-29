@@ -6,7 +6,7 @@
 
 ## Synopsis
 
-Listening to favorite radio station from a different timezone gets weird - nighttime programme is not exactly what you'd want in the morning. Enter streamshift - it buffers audio streams, and serves them back with a user-defined offset.
+Listening to radio station originating in different timezone is odd - nighttime programme is not exactly what you'd expect in the morning. Enter streamshift - buffer audio streams, and serve them back with a user-defined offset.
 
 ## Running
 
@@ -14,22 +14,22 @@ Listening to favorite radio station from a different timezone gets weird - night
 ```
 [global]
 buffer_dir = ./data/
+port = 5000
 
 [stream1]
 url = http://stream3.polskieradio.pl:8904/
-buffer = 86400 # how many much history to keep locally
+buffer = 86400 # number of seconds to buffer
 ```
 
-### Buffering
+### Buffer audio streams
 ```
-./manage.py
+streamshift buffer --config=./config.cfg
 ```
 
-### Serving
+### Serve over http
 ```
-./main.py
+streamshift web --config=./config.cfg
 ```
-Flask app will listen on port 5000 by default
 
 ## Setup & hacking
 ```
