@@ -1,6 +1,7 @@
 [![Travis](https://img.shields.io/travis/patyk/streamshift.svg)](https://travis-ci.org/patyk/streamshift)
 [![Coverage Status](https://coveralls.io/repos/github/patyk/streamshift/badge.svg?branch=master)](https://coveralls.io/github/patyk/streamshift?branch=master)
 [![Github All Releases](https://img.shields.io/github/downloads/patyk/streamshift/total.svg)]()
+[![PyPI](https://img.shields.io/pypi/v/streamshift.svg)]()
 
 # streamshift
 
