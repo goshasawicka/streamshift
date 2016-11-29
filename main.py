@@ -42,4 +42,4 @@ if __name__ == "__main__":
         urls[station] = config.get(station, 'url')
 
     app.config['URLS'] = urls
-    app.run(host="0.0.0.0", threaded = True)
+    app.run(host="0.0.0.0", port=config.items(config.sections()[0])[1][1], threaded = True)
