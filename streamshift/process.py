@@ -23,20 +23,12 @@ class StreamProcess(GenericObject):
     def purge(self):
         self.logger.info("Purging")
         while True:
-            # print ("### process.py, StreamProcess purge in while loop")
-
+            print ("### in while loop")
             time.sleep(1)
-
-            # print ("###### process.py, StreamProcess purge after sleep")
-            # stream = Stream(self.url, self.cm)
-            # print ("### process.py, StreamProcess stream created")
-
-            # stream.purge()
-
             for chunk in self.cm.list():
-                if (time.time() - float(os.path.basename(chunk.timestamp))) > self.buffer:
-                        self.logger.debug("Purge chunk %s" % os.path.basename(chunk.timestamp))
-                        chunk.delete()
+                if float(time.time() - float(os.path.basename(chunk.timestamp))) > float(self.buffer):
+                    self.logger.debug("Purge chunk %s" % os.path.basename(chunk.timestamp))
+                    chunk.delete()
 
 
     def buffering(self):

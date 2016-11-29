@@ -37,8 +37,10 @@ class Chunk(GenericObject):
 
     @property
     def seconds(self):
-        return float(self.cm.next(self).timestamp) - float(self.timestamp)
-
+        try:
+            return float(self.cm.next(self).timestamp) - float(self.timestamp)
+        except AttributeError:
+            print "Cannot find next file"
 
 class ChunkManager(GenericObject):
 
@@ -54,7 +56,10 @@ class ChunkManager(GenericObject):
 
     def find(self):
         self.logger.debug("Find chunk with offset %s" % str(self.shift))
+        print ("###", time.time())
+        print ("###", self.shift)
         t = time.time() - self.shift
+        print ("###", t)
         files = sorted(os.listdir(self.path))
 
         for file in files:
@@ -90,8 +95,8 @@ class Stream(GenericObject):
 
 
     def listen(self):
-        # print ("### stream.py, Stream listen")
         chunk = self.cm.find()
+        # print ("####", chunk.timestamp)
         while chunk:
             self.logger.info("Listening to chunk %d" % float(chunk.timestamp))
             yield chunk.read()
