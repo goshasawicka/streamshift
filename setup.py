@@ -3,10 +3,10 @@ from setuptools import setup
 
 setup(
     name="streamshift",
-    version="0.0.4",
+    version="0.0.5",
     author="Gosha Sawicka",
     author_email="mal.galazka@gmail.com",
-    scripts=['streamshift/streamshift.py'],
+    scripts=['./streamshift.py'],
     description=("Buffer audio streams and serve them back with a user-defined offset"),
     license="MIT",
     keywords="radio audio stream",
