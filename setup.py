@@ -10,7 +10,7 @@ def read(fname):
 
 setup(
     name="streamshift",
-    version="0.0.1",
+    version="0.0.2",
     author="Gosha Sawicka",
     author_email="mal.galazka@gmail.com",
     description=("Buffer audio streams and serve them back with a user-defined offset"),
