@@ -38,4 +38,6 @@ virtualenv .
 . ./bin/activate
 pip install -r requirements.txt
 nosetests --exe
+(...)
+python setup.py sdist upload -r pypi
 ```
