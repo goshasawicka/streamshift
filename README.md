@@ -37,6 +37,11 @@ streamshift_cli --mode web
 ```
 streamshift_cli --help
 ```
+### Listening (on vlc)
+```
+vlc http://localhost:<port>/station/<station_name>/<offset_in_sec>
+```
+
 ## Setup & hacking
 ```
 virtualenv .
