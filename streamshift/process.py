@@ -23,7 +23,6 @@ class StreamProcess(GenericObject):
     def purge(self):
         self.logger.info("Purging")
         while True:
-            print ("### in while loop")
             time.sleep(1)
             for chunk in self.cm.list():
                 if float(time.time() - float(os.path.basename(chunk.timestamp))) > float(self.buffer):

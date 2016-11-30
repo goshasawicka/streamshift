@@ -56,10 +56,7 @@ class ChunkManager(GenericObject):
 
     def find(self):
         self.logger.debug("Find chunk with offset %s" % str(self.shift))
-        print ("###", time.time())
-        print ("###", self.shift)
         t = time.time() - self.shift
-        print ("###", t)
         files = sorted(os.listdir(self.path))
 
         for file in files:
@@ -89,14 +86,12 @@ class ChunkManager(GenericObject):
 class Stream(GenericObject):
 
     def __init__(self, url, cm):
-        # print ("### stream.py, Stream init")
         self.url = url
         self.cm = cm
 
 
     def listen(self):
         chunk = self.cm.find()
-        # print ("####", chunk.timestamp)
         while chunk:
             self.logger.info("Listening to chunk %d" % float(chunk.timestamp))
             yield chunk.read()
@@ -105,19 +100,3 @@ class Stream(GenericObject):
             chunk = self.cm.next(chunk)
 
         self.logger.error("Run out of chunks")
-
-    # def purge(self):
-        # print ("### stream.py, Stream purge")
-        # for chunk in self.cm.list():
-        #     if (time.time() - float(os.path.basename(chunk.timestamp))) > chunk.cm.buffer:
-        #         self.logger.debug("Purge chunk %s" % os.path.basename(chunk.timestamp))
-        #         chunk.delete()
-
-    # def buffer(self):
-        # print ("### stream.py, Stream buffer")
-        # conn = urllib2.urlopen(self.url)
-        # while True:
-        #     chunk = conn.read(BUFFER_SIZE)
-        #     if not chunk:
-        #         break
-        #     self.cm.write(time.time(), chunk)

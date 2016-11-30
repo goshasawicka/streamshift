@@ -13,4 +13,12 @@ setup(
     url="https://github.com/patyk/streamshift",
     packages=['streamshift', 'tests'],
     classifiers=[],
+    py_modules=['streamshift_cli'],
+    install_requires=[
+        'Click',
+        ],
+    entry_points='''
+        [console_scripts]
+        streamshift_cli=streamshift_cli:cli
+        '''
 )
