@@ -21,17 +21,22 @@ port = 5000
 url = http://stream3.polskieradio.pl:8904/
 buffer = 86400 # number of seconds to buffer
 ```
-
+### Command line:
 ### Buffer audio streams
 ```
-streamshift buffer --config=./config.cfg
+streamshift_cli --mode buffer
+
 ```
 
 ### Serve over http
 ```
-streamshift web --config=./config.cfg
+streamshift_cli --mode web
 ```
 
+### Help
+```
+streamshift_cli --help
+```
 ## Setup & hacking
 ```
 virtualenv .
