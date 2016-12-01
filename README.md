@@ -9,9 +9,7 @@
 
 Listening to radio station originating in different timezone is odd - nighttime programme is not exactly what you'd expect in the morning. Enter streamshift - buffer audio streams, and serve them back with a user-defined offset.
 
-## Running
-
-### Config
+## Config
 ```
 [global]
 buffer_dir = ./data/
@@ -21,25 +19,27 @@ port = 5000
 url = http://stream3.polskieradio.pl:8904/
 buffer = 86400 # number of seconds to buffer
 ```
-### Command line:
+## Running
+
 ### Buffer audio streams
 ```
-streamshift_cli --mode buffer
+streamshift --mode buffer
 
 ```
 
 ### Serve over http
 ```
-streamshift_cli --mode web
+streamshift --mode web
+```
+
+### Listening (with vlc)
+```
+vlc http://localhost:<port>/station/<station_name>/<offset_in_sec>
 ```
 
 ### Help
 ```
-streamshift_cli --help
-```
-### Listening (on vlc)
-```
-vlc http://localhost:<port>/station/<station_name>/<offset_in_sec>
+streamshift --help
 ```
 
 ## Setup & hacking

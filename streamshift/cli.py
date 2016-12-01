@@ -1,6 +1,7 @@
-from main import app
+#!/usr/bin/env python
+
 from multiprocessing import Process
-from streamshift import StreamProcess
+from streamshift import StreamProcess, app
 
 import ConfigParser
 import click
@@ -41,3 +42,6 @@ def cli(mode):
 
     else:
         click.echo("UUUPS: Incorrect mode. Please refer to --help for assistance")
+
+if __name__ == '__main__':
+    cli()

@@ -29,17 +29,3 @@ def station(name, shift_offset):
     ).listen()
 
     return Response(stream, mimetype='audio/mpeg')
-
-
-if __name__ == "__main__":
-    config = ConfigParser.ConfigParser()
-    config.read('./config.cfg')
-
-    stations = config.sections()
-    stations.remove('global')
-    urls = {}
-    for station in stations:
-        urls[station] = config.get(station, 'url')
-
-    app.config['URLS'] = urls
-    app.run(host="0.0.0.0", port=config.items(config.sections()[0])[1][1], threaded = True)
