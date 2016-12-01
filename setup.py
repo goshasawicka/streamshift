@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name="streamshift",
-    version="0.0.8",
+    version="0.0.9",
     author="Gosha Sawicka",
     author_email="mal.galazka@gmail.com",
     description=("Buffer audio streams and serve them back with a user-defined offset"),
@@ -18,6 +18,6 @@ setup(
         ],
     entry_points='''
         [console_scripts]
-        streamshift=streamshift:cli
+        streamshift=streamshift.cli:cli
         '''
 )
